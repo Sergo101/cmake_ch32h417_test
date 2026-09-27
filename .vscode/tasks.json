@@ -1,0 +1,53 @@
+{
+    "version": "2.0.0",
+    "windows": {
+        "options": {
+            "shell": {
+                "executable": "cmd.exe",
+                "args": ["/d", "/c"]
+            }
+        }
+    },
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "start openocd",
+            "command": "C:/MounRiver/MounRiver_Studio2/resources/app/resources/win32/components/WCH/OpenOCD/OpenOCD/bin/openocd.exe -f C:/MounRiver/MounRiver_Studio2/resources/app/resources/win32/components/WCH/OpenOCD/OpenOCD/bin/wch-dual-core.cfg",
+            "args":[],
+
+            "isBackground": true,
+            "problemMatcher": {
+                "pattern": {
+                  "regexp": "Error:",
+                  "file": 1,
+                  "location": 1,
+                  "severity": 4
+                },
+                "background": {
+                  "activeOnStart": true,
+                  "beginsPattern": "Open On-Chip Debugger 0.11.0+dev-snapshot",
+                  "endsPattern": "Info : Listening on port 3334 for gdb connections"
+                }
+            }
+                },
+                {
+                    "type": "cmake",
+                    "label": "CMake: clean rebuild",
+                    "command": "cleanRebuild",
+                    "targets": [
+                        "all"
+                    ],
+                    "preset": "${command:cmake.activeBuildPresetName}",
+                    "group": "build",
+                    "problemMatcher": [],
+                    "detail": "CMake template clean rebuild task"
+                },
+        {
+            "type": "shell",
+            "label": "flash",
+            "group": "build",
+            "dependsOn": "CMake: build",
+            "command": "openocd -f interface/wch-riscv.cfg -c \"program ${input:workspaceFolderForwardSlash}/build/${workspaceFolderBasename}.hex verify reset exit\"",
+        }
+    ]
+}

@@ -1,0 +1,49 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Build & Debug Microcontroller - WCH-Link",
+            "cwd": "${workspaceFolder}",
+            // "loadFiles": [""],
+            "request": "launch",
+            "type": "cortex-debug",
+            "runToEntryPoint": "main",
+            "numberOfProcessors": 2,
+            "targetProcessor": 0,
+            // "servertype": "openocd",
+            "servertype": "external",
+            "gdbTarget": "localhost:3333",
+            "preLaunchTask": "start openocd",
+            "overrideLaunchCommands": [
+                "set mem inaccessible-by-default off",
+                "set architecture riscv:rv32",
+                "set remotetimeout unlimited",
+                "set disassembler-options xw"
+            ],
+            "preLaunchCommands": [
+                "load C:/MounRiver/ch32h417/cmake_ch32h417_test/build/debug/cmake_ch32h417.hex"
+            ],
+
+            "executable": "${command:cmake.launchTargetPath}",
+            "svdFile": "${workspaceFolder}/CH32H417xx.svd",
+        },
+        {
+            "name": "Attach to Microcontroller - WCH-Link",
+            "cwd": "${workspaceFolder}",
+            "type": "cortex-debug",
+            "executable": "${command:cmake.launchTargetPath}",
+
+            "request": "attach",
+            "servertype": "openocd",
+            "configFiles": [
+                "interface/wch-riscv.cfg"
+            ],
+
+            "runToEntryPoint": "main",
+            "svdFile": "${workspaceFolder}/CH32V203xx.svd"
+        }
+    ]
+}

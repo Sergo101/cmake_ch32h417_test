@@ -1,0 +1,16 @@
+{
+    "files.associations": {
+        "ch32v00x.h": "c",
+        "ch32v00x_gpio.h": "c"
+    },
+    "cortex-debug.variableUseNaturalFormat": true,
+    "cortex-debug.gdbPath.windows": "C:/MounRiver/toolchain/RISC-V_Embedded_GCC12/bin/riscv-none-elf-gdb.exe",
+    "cortex-debug.objdumpPath": "C:/MounRiver/toolchain/RISC-V_Embedded_GCC12/bin/riscv-none-elf-objdump.exe",
+    "cortex-debug.armToolchainPath.windows": "C:/MounRiver/toolchain/RISC-V_Embedded_GCC12/bin",
+    "cortex-debug.openocdPath.windows": "C:/MounRiver/MounRiver_Studio2/resources/app/resources/win32/components/WCH/OpenOCD/OpenOCD/bin/openocd.exe",
+    "terminal.integrated.env.windows": { 
+        "PATH":"${env:PATH};C:\\MounRiver\\MounRiver_Studio\\toolchain\\RISC-V Embedded GCC12\\bin", 
+        "foo": "bar"
+    }
+    // C:\MounRiver\MounRiver_Studio\toolchain\OpenOCD\bin> openocd.exe
+}
