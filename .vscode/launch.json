@@ -7,7 +7,7 @@
         {
             "name": "Build & Debug Microcontroller - WCH-Link",
             "cwd": "${workspaceFolder}",
-            // "loadFiles": [""],
+            "loadFiles": ["C:/MounRiver/ch32h417/cmake_ch32h417_test/build/debug/V3F/cmake_ch32h417_v3f.hex"],
             "request": "launch",
             "type": "cortex-debug",
             "runToEntryPoint": "main",
@@ -24,8 +24,9 @@
                 "set disassembler-options xw"
             ],
             "preLaunchCommands": [
-                "load C:/MounRiver/ch32h417/cmake_ch32h417_test/build/debug/cmake_ch32h417.hex"
+                "load C:/MounRiver/ch32h417/cmake_ch32h417_test/build/debug/V3F/cmake_ch32h417_v3f.hex"
             ],
+            // "preRestartCommands": [],
 
             "executable": "${command:cmake.launchTargetPath}",
             "svdFile": "${workspaceFolder}/CH32H417xx.svd",
