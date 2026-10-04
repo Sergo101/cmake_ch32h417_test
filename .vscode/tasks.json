@@ -12,7 +12,28 @@
         {
             "type": "shell",
             "label": "start openocd",
-            "command": "C:/MounRiver/MounRiver_Studio2/resources/app/resources/win32/components/WCH/OpenOCD/OpenOCD/bin/openocd.exe -f C:/MounRiver/MounRiver_Studio2/resources/app/resources/win32/components/WCH/OpenOCD/OpenOCD/bin/wch-dual-core.cfg",
+            "command": "C:/MounRiver/MounRiver_Studio2/resources/app/resources/win32/components/WCH/OpenOCD/OpenOCD/bin/openocd.exe -f C:/MounRiver/MounRiver_Studio2/resources/app/resources/win32/components/WCH/OpenOCD/OpenOCD/bin/wch-dual-core.cfg -c noload",
+            "args":[],
+
+            "isBackground": true,
+            "problemMatcher": {
+                "pattern": {
+                  "regexp": "Error:",
+                  "file": 1,
+                  "location": 1,
+                  "severity": 4
+                },
+                "background": {
+                  "activeOnStart": true,
+                  "beginsPattern": "Open On-Chip Debugger 0.11.0+dev-snapshot",
+                  "endsPattern": "Info : Listening on port 4444 for telnet connections"
+                }
+            }
+        },
+        {
+            "type": "shell",
+            "label": "flash openocd",
+            "command": "C:/MounRiver/MounRiver_Studio2/resources/app/resources/win32/components/WCH/OpenOCD/OpenOCD/bin/openocd.exe -f C:/MounRiver/MounRiver_Studio2/resources/app/resources/win32/components/WCH/OpenOCD/OpenOCD/bin/wch-dual-core.cfg -c \"program C:/MounRiver/ch32h417/cmake_ch32h417_test/build/debug/V5F/cmake_ch32h417_v5f.hex verify reset",
             "args":[],
 
             "isBackground": true,
@@ -47,7 +68,7 @@
             "label": "flash",
             "group": "build",
             "dependsOn": "CMake: build",
-            "command": "openocd -f interface/wch-riscv.cfg -c \"program ${input:workspaceFolderForwardSlash}/build/${workspaceFolderBasename}.hex verify reset exit\"",
+            "command": "C:/MounRiver/MounRiver_Studio2/resources/app/resources/win32/components/WCH/OpenOCD/OpenOCD/bin/openocd.exe -f C:/MounRiver/MounRiver_Studio2/resources/app/resources/win32/components/WCH/OpenOCD/OpenOCD/bin/wch-dual-core.cfg -c \"program C:/MounRiver/ch32h417/cmake_ch32h417_test/build/debug/V5F/cmake_ch32h417_v5f.hex verify reset exit\"",
         }
     ]
 }

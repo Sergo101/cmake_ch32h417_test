@@ -9,14 +9,24 @@ MEMORY
 {
 	/*FLASH, RAM, and RAM-CODE can be freely configured according to project 
 	requirements;Please refer to the datasheet manual for specific allocation*/
+	FLASHV3F (rx) : ORIGIN = 0x00000000, LENGTH = 64K
 	FLASH (rx) : ORIGIN = 0x00010000, LENGTH = 128K                    /* zero_wait flah ,and loaded into RAM_CODE for running */
 	RAM_CODE (xrw) : ORIGIN = 0x200A0000, LENGTH = 128K                /*ITCM RAM for running code*/
 	RAM (xrw) : ORIGIN = (0x200C0000+512+256), LENGTH = (256K-512-256) /*DTCM RAM for .data .bss section and other*/ 
 	RAM_LOAD (xrw) : ORIGIN = (0x200C0000+512), LENGTH = 256           /* RAM for .load section*/
 }
 
+TARGET(binary) /* specify the file format of binary file */
+INPUT (V3F/main_core.bin) /* bootloader bin file path (relative to the output folder)*/
+OUTPUT_FORMAT(default) /* restore the out file format */
+
 SECTIONS
 {
+	.flashv3f :
+  {
+    . = ALIGN(4);
+    KEEP(V3F/main_core.bin)
+  } > FLASHV3F
 	.init :
 	{
 		_sinit = .;

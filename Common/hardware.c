@@ -43,7 +43,7 @@ void Hardware(void)
 	GPIO_Init1();
 	while(1)
 	{
-        Delay_Ms(1000);
+        Delay_Ms(100);
         GPIO_WriteBit(GPIOC, GPIO_Pin_2, (x == 0) ? (x = Bit_SET) : (x = Bit_RESET));
         GPIO_WriteBit(GPIOC, GPIO_Pin_3, (i == 0) ? (i = Bit_SET) : (i = Bit_RESET));
 	}
