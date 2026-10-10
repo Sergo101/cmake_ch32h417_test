@@ -34,6 +34,7 @@
             ],
             // "openOCDLaunchCommands": [],
             "openOCDLaunchCommands": [
+                "chip_id CH32H417",
                 "noload",
                 "init",
                 "wch_riscv unfreeze"
