@@ -93,7 +93,7 @@ void Delay_Ms(uint32_t n)
         ;
     SysTick0->CTLR &= ~(1 << 0);
 #elif defined(Core_V5F)
-    SysTick0->ISR &= ~(1 << 1);
+    SysTick1->ISR &= ~(1 << 1);
     i = (uint32_t)n * p_ms;
 
     SysTick1->CNT = 0;
@@ -101,7 +101,7 @@ void Delay_Ms(uint32_t n)
     SysTick1->CTLR = (1 << 2);
     SysTick1->CTLR |= (1 << 0);
 
-    while((SysTick0->ISR & (1 << 1)) != (1 << 1))
+    while((SysTick1->ISR & (1 << 1)) != (1 << 1))
         ;
     SysTick1->CTLR &= ~(1 << 0);
 #endif

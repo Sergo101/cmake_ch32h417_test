@@ -12,7 +12,7 @@
         {
             "type": "shell",
             "label": "start openocd",
-            "command": "C:/MounRiver/MounRiver_Studio2/resources/app/resources/win32/components/WCH/OpenOCD/OpenOCD/bin/openocd.exe -f C:/MounRiver/MounRiver_Studio2/resources/app/resources/win32/components/WCH/OpenOCD/OpenOCD/bin/wch-dual-core.cfg -c noload",
+            "command": "${env:WCH_OPENOCD}/openocd.exe -f ${env:WCH_OPENOCD}/wch-dual-core.cfg -c noload",
             "args":[],
 
             "isBackground": true,
@@ -33,7 +33,7 @@
         {
             "type": "shell",
             "label": "flash openocd",
-            "command": "C:/MounRiver/MounRiver_Studio2/resources/app/resources/win32/components/WCH/OpenOCD/OpenOCD/bin/openocd.exe -f C:/MounRiver/MounRiver_Studio2/resources/app/resources/win32/components/WCH/OpenOCD/OpenOCD/bin/wch-dual-core.cfg -c \"program C:/MounRiver/ch32h417/cmake_ch32h417_test/build/debug/V5F/cmake_ch32h417_v5f.hex verify reset",
+            "command": "${env:WCH_OPENOCD}/openocd.exe -f ${env:WCH_OPENOCD}/wch-dual-core.cfg -c \"program C:/MounRiver/ch32h417/cmake_ch32h417_test/build/debug/V5F/cmake_ch32h417_v5f.hex verify reset",
             "args":[],
 
             "isBackground": true,
@@ -68,7 +68,7 @@
             "label": "flash",
             "group": "build",
             "dependsOn": "CMake: build",
-            "command": "C:/MounRiver/MounRiver_Studio2/resources/app/resources/win32/components/WCH/OpenOCD/OpenOCD/bin/openocd.exe -f C:/MounRiver/MounRiver_Studio2/resources/app/resources/win32/components/WCH/OpenOCD/OpenOCD/bin/wch-dual-core.cfg -c \"program C:/MounRiver/ch32h417/cmake_ch32h417_test/build/debug/V5F/cmake_ch32h417_v5f.hex verify reset exit\"",
+            "command": "${env:WCH_OPENOCD}/openocd.exe -f ${env:WCH_OPENOCD}/wch-dual-core.cfg -c \"program C:/MounRiver/ch32h417/cmake_ch32h417_test/build/debug/V5F/cmake_ch32h417_v5f.hex verify reset exit\"",
         }
     ]
 }

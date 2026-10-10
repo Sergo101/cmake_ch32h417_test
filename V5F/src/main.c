@@ -40,7 +40,7 @@ int main(void)
 	SystemAndCoreClockUpdate();
 	Delay_Init();
 	USART_Printf_Init(115200);
-	printf("V5F SystemCoreClk:%d\r\n", SystemCoreClock);
+	printf("V5F SystemCoreClk:%ld\r\n", SystemCoreClock);
 
 	Delay_Ms(500);
 

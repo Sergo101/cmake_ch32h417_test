@@ -17,8 +17,8 @@
 * reset the HSI is used as SYSCLK source).
 * If none of the define below is enabled, the HSI is used as System clock source. 
 */
-#define SYSCLK_400M_CoreCLK_V5F_400M_V3F_100M_HSE    400000000
-// #define SYSCLK_480M_CoreCLK_V5F_240M_V3F_120M_HSE    480000000
+// #define SYSCLK_400M_CoreCLK_V5F_400M_V3F_100M_HSE    400000000
+#define SYSCLK_480M_CoreCLK_V5F_240M_V3F_120M_HSE    480000000
 // #define SYSCLK_400M_CoreCLK_V5F_400M_V3F_100M_HSI    400000000
 // #define SYSCLK_480M_CoreCLK_V5F_240M_V3F_120M_HSI    480000000
 
