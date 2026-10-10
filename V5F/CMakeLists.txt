@@ -19,6 +19,11 @@ set(CMAKE_C_STANDARD 99)
 
 set(EXEC_NAME ${CMAKE_PROJECT_NAME}_v5f)
 
+set(cpu_PARAMS
+    -march=rv32imac_zba_zbb_zbc_zbs_xw
+    -mabi=ilp32
+)
+
 set(include_DIRS
     ${CMAKE_CURRENT_LIST_DIR}/inc
     ${CMAKE_CURRENT_LIST_DIR}/../Core
@@ -63,11 +68,9 @@ target_link_libraries(${EXEC_NAME} ${link_LIBS})
 
 # Compiler options
 target_compile_options(${EXEC_NAME} PRIVATE
-    -march=rv32imac_zba_zbb_zbc_zbs_xw
-    -mabi=ilp32
-    -mcmodel=medany
+    ${cpu_PARAMS}
     -msmall-data-limit=8
-    -mno-save-restore
+    -msave-restore
     -fmessage-length=0
     -fsigned-char
     -ffunction-sections
@@ -89,18 +92,24 @@ target_link_options(${EXEC_NAME} PRIVATE
     -T ${LINKER_SCRIPT}
     ${cpu_PARAMS}
     ${linker_OPTS}
-    -march=rv32imac -mabi=ilp32
     -nostartfiles 
     -Xlinker --gc-sections  
     -Wl,--print-memory-usage
-    -Wl,-Map,${EXEC_NAME}.map 
+    -Wl,-Map,V5F/${EXEC_NAME}.map 
     --specs=nano.specs 
     --specs=nosys.specs
+    -Wl,--start-group
+    -lc
+    -lm
+    -lstdc++
+    -lsupc++
+    -Wl,--end-group
+    -Wl,-z,max-page-size=8 # Allow good software remapping across address space (with proper GCC section making)
 )
 
 # Execute post-build to print size, generate hex and bin
 add_custom_command(TARGET ${EXEC_NAME} POST_BUILD
     COMMAND ${CMAKE_SIZE} $<TARGET_FILE:${EXEC_NAME}>
     COMMAND ${CMAKE_OBJCOPY} -O ihex $<TARGET_FILE:${EXEC_NAME}> ${EXEC_NAME}.hex
-    COMMAND ${CMAKE_OBJCOPY} -O binary $<TARGET_FILE:${EXEC_NAME}> IMAGE.BIN
+    COMMAND ${CMAKE_OBJCOPY} -O binary $<TARGET_FILE:${EXEC_NAME}> ${EXEC_NAME}.bin
 )

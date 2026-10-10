@@ -11,24 +11,33 @@
             // "loadFiles": ["C:/MounRiver/ch32h417/cmake_ch32h417_test/build/debug/V3F/cmake_ch32h417_v3f.hex"],
             "request": "launch",
             "type": "cortex-debug",
+            "showDevDebugOutput": "parsed",
             // "runToEntryPoint": "main",
-            "numberOfProcessors": 2,
-            "targetProcessor": 0,
-            "chainedConfigurations": {
-                "enabled": true,
-                "waitOnEvent": "postInit",
-                "detached": false,                         // Set this to true for JLink/STLink, false for most other type servers
-                "lifecycleManagedByParent": true,
-                "launches": [                              // Array of launches. Order is respected
-                    {
-                        "name": "Attach to Second Core - WCH-Link",     // Name of another configuration
-                        "folder": ""
-                    }
-                ],
-            },
-            "servertype": "external",
-            "gdbTarget": "localhost:3333",
-            "preLaunchTask": "start openocd",
+            // "numberOfProcessors": 2,
+            // "targetProcessor": 0,
+            // "chainedConfigurations": {
+            //     "enabled": true,
+            //     "waitOnEvent": "postInit",
+            //     "detached": false,                         // Set this to true for JLink/STLink, false for most other type servers
+            //     "lifecycleManagedByParent": true,
+            //     "launches": [                              // Array of launches. Order is respected
+            //         {
+            //             "name": "Attach to Second Core - WCH-Link",     // Name of another configuration
+            //             "folder": ""
+            //         }
+            //     ],
+            // },
+            "servertype": "openocd",
+            "configFiles": [
+                // "${env:WCH_OPENOCD}/wch-riscv.cfg"
+                "${env:WCH_OPENOCD}/wch-dual-core-vscode.cfg"
+            ],
+            // "openOCDLaunchCommands": [],
+            "openOCDLaunchCommands": [
+                "noload",
+                "init",
+                "wch_riscv unfreeze"
+            ],
             "overrideLaunchCommands": [
                 "set mem inaccessible-by-default off",
                 "set architecture riscv:rv32",
@@ -53,7 +62,7 @@
             "numberOfProcessors": 2,
             "targetProcessor": 1,
             "servertype": "external",
-            "gdbTarget": "localhost:3334",
+            "gdbTarget": "localhost:50005",
             "svdFile": "${workspaceFolder}/CH32H417xx.svd",
         }
     ]

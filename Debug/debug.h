@@ -44,9 +44,9 @@
 #define Run_Core_V3FandV5F   2
 
 #ifndef Run_Core
-#define Run_Core   Run_Core_V3FandV5F
+// #define Run_Core   Run_Core_V3FandV5F
 // #define Run_Core   Run_Core_V5F
-// #define Run_Core   Run_Core_V3F
+#define Run_Core   Run_Core_V3F
 #endif
 
 /* Core start addrress Definition */
