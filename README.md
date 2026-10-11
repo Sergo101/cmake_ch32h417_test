@@ -1,22 +1,45 @@
-# CH32V203-CMake
+# CH32H417-CMake
 
-摆脱eclipse编译环境，使用vscode编辑代码。
+Blink example for ch32h417 mcu.
 
-此仓库为cmake模板，请根据自己的工程进行适当修改。
+This repo shows how to build dual core project for ch32h417 with cmake and debug in VSCode using gdb and openocd.
 
-请在CmakeLists.txt文件内更改`TOOLPATH`的变量为你的工具链路径。
+Cortex-debug run dual core in single workspace.
 
-```shell
-A和B方法任选其一即可
+This example starts at nanoCH32H417 v1.0 board.
 
-A、使用cmake生成eclipse Makefile工程
-cmake -G"Eclipse CDT4 - Unix Makefiles" ..
-如果没有把make.exe加入系统path:
-cmake -G"Eclipse CDT4 - Unix Makefiles" -D"你的路径/make.exe"  ..
+# Build requirements
 
-B、使用cmake生成ninja工程
-cmake -G"Ninja" ..
-如果没有把ninja.exe加入系统path:
-cmake -G"Ninja" -D"你的路径/ninja.exe" ..
-```
+cmake
 
+ninja
+
+riscv-wch-elf-gcc - can be found in MounRiver_Studio2\resources\app\resources\win32\components\WCH\Toolchain\RISC-V Embedded GCC12\bin
+
+You should add path to compiler to PATH system variable or hardcode it in cmake/riscv-wch-elf.cmake and in .vscode/tools.json
+
+# Debug requirements
+
+WCH uses their oun version of openocd, so you should specify system variable WCH_OPENOCD or hardcode pathes just replace ${env:WCH_OPENOCD} with path to openocd.exe. Openocd can be found in MounRiver_Studio2\resources\app\resources\win32\components\WCH\OpenOCD\OpenOCD\bin
+
+riscv-wch-elf-gdb is a part of WCH toolchain and path to it you can find in 'Build requirements'. 
+
+# VSCode extensions requirements
+
+
+
+Cortex-debug
+
+Cmake
+
+Cmake tools
+
+Command Variable
+
+# Build in VSCode using CMake extension
+
+Press Ctrl+Shift+P, type CMake: Select Configure Preset
+
+Click debug or whatever
+
+Press Build button on lower panel

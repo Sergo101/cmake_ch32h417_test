@@ -33,10 +33,10 @@
         {
             "type": "shell",
             "label": "flash openocd",
-            "command": "${env:WCH_OPENOCD}/openocd.exe -f ${env:WCH_OPENOCD}/wch-dual-core.cfg -c \"program C:/MounRiver/ch32h417/cmake_ch32h417_test/build/debug/V5F/cmake_ch32h417_v5f.hex verify reset",
+            "command": "${env:WCH_OPENOCD}/openocd.exe -f ${input:workspaceFolderForvardSlash}/debug_files/wch-dual-core-vscode.cfg -c \"program ${input:workspaceFolderForvardSlash}/build/debug/V5F/cmake_ch32h417_v5f.hex verify reset exit\"",
             "args":[],
 
-            "isBackground": true,
+            "isBackground": false,
             "problemMatcher": {
                 "pattern": {
                   "regexp": "Error:",
@@ -51,24 +51,18 @@
                 }
             }
         },
-        {
-            "type": "cmake",
-            "label": "CMake: clean rebuild",
-            "command": "cleanRebuild",
-            "targets": [
-                "all"
-            ],
-            "preset": "${command:cmake.activeBuildPresetName}",
-            "group": "build",
-            "problemMatcher": [],
-            "detail": "CMake template clean rebuild task"
-        },
-        {
-            "type": "shell",
-            "label": "flash",
-            "group": "build",
-            "dependsOn": "CMake: build",
-            "command": "${env:WCH_OPENOCD}/openocd.exe -f ${env:WCH_OPENOCD}/wch-dual-core.cfg -c \"program C:/MounRiver/ch32h417/cmake_ch32h417_test/build/debug/V5F/cmake_ch32h417_v5f.hex verify reset exit\"",
-        }
-    ]
+    ],
+    "inputs": [
+    {
+      "id": "workspaceFolderForvardSlash",
+      "type": "command",
+      "command": "extension.commandvariable.transform",
+      "args": {
+        "text": "${workspaceFolder}",
+        "find": "\\\\",
+        "replace": "/",
+        "flags": "g"
+      }
+    }
+  ]
 }
